@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+.a-note {
+  border: solid black 2px;
+  margin: 1em
+}
+
+.a-note:hover {
+  background-color: lightblue;
+  color: peru;
+}
+
+.formAdmin {
+  border: solid purple 2px;
+  border-radius: 12px;
+  margin: 1em;
+  height: 32vh;
+}

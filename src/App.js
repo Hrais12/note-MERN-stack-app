@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import { getNotes } from "./util/notes-api";
+import NotesPage from "./pages/NotesPage";
+import CreateForm from "./components/CreateForm";
+import UpdateForm from "./components/UpdateForm";
+import "./App.css";
 
-function App() {
+export default function App() {
+  const [notes, setNotes] = useState([]);
+  const [updateForm, setUpdateForm] = useState({
+    _id: null,
+    title: "",
+    body: "",
+  });
+
+  useEffect(() => {
+    getNotes(setNotes);
+  }, [notes]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <CreateForm setNotes={setNotes} notes={notes} />
+      <UpdateForm updateForm={updateForm} setUpdateForm={setUpdateForm} />
+      <NotesPage
+        notes={notes}
+        setNotes={setNotes}
+        setUpdateForm={setUpdateForm}
+      />
     </div>
   );
 }
-
-export default App;
